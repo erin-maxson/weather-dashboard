@@ -32,6 +32,26 @@ fetch (urlCurrentWeather)
 .then(function (currentData) {
     console.log(currentData)
     var fiveDayWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&exclude={part}&appid=${api}'
+
+    fetch(fiveDayWeather)
+    .then(function(response){
+        return response.json()
+    })
+
+    .then(function(fiveDayData){
+        console.log(fiveDayData)
+
+        var currentDate = moment.unix(currentData.dt).format("MM/DD/YYYY")  
+        
+        cityHeaderEl.textContent = currentData.name + " " + currentDate
+        var iconImage = document.createElement("img")
+        iconImage.setAttribute("src", 'http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png')
+        tempEl.innerHTML = currentData.main.temp
+        windEl.innerHTML = currentData
+
+
+    })
+
 })
 
 
