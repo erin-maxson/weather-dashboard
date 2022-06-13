@@ -12,5 +12,17 @@ var uvEl = document.querySelector("#uv")
 // city 5 day forecast cards
 var cityDay1 = document.querySelector("#city-header-card-1")
 
-// addEventListener on submit and create a dashboard function
+// API Key
+var api = " "
 
+
+// function to display weather
+
+function displayWeather {
+    var cityName = cityEl.value
+    var urlCurrentWeather = 'https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={api}'
+}
+
+
+// addEventListener on submit and create a dashboard function
+cityFormEl.addEventListener("submit", displayWeather)
