@@ -22,38 +22,39 @@ function displayWeather() {
     event.preventDefault()
     var cityName = cityEl.value
     var urlCurrentWeather = 'https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${api}'
-}
 
-fetch (urlCurrentWeather)
-.then(function(response){
-    return response.json()
-})
+    fetch(urlCurrentWeather)
+        .then(function (response) {
+            return response.json()
+        })
 
-.then(function (currentData) {
-    console.log(currentData)
-    var fiveDayWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&exclude={part}&appid=${api}'
+        .then(function (currentData) {
+            console.log(currentData)
+            var fiveDayWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&exclude={part}&appid=${api}'
 
-    fetch(fiveDayWeather)
-    .then(function(response){
-        return response.json()
-    })
+            fetch(fiveDayWeather)
+                .then(function (response) {
+                    return response.json()
+                })
 
-    .then(function(fiveDayData){
-        console.log(fiveDayData)
+                .then(function (fiveDayData) {
+                    console.log(fiveDayData)
 
-        var currentDate = moment.unix(currentData.dt).format("MM/DD/YYYY")  
-        
-        cityHeaderEl.textContent = currentData.name + " " + currentDate
-        var iconImage = document.createElement("img")
-        iconImage.setAttribute("src", 'http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png')
-        tempEl.innerHTML = currentData.main.temp
-        windEl.innerHTML = currentData
+                    var currentDate = moment.unix(currentData.dt).format("MM/DD/YYYY")
 
-
-    })
-
-})
+                    cityHeaderEl.textContent = currentData.name + " " + currentDate
+                    var iconImage = document.createElement("img")
+                    iconImage.setAttribute("src", 'http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png')
+                    tempEl.innerHTML = currentData.main.temp
+                    // windEl.innerHTML = currentData
+                    // humidEl.innerHTML = currentData.
+                    // uvEl.innerHTML = currentData.
 
 
-// addEventListener on submit and create a dashboard function
-cityFormEl.addEventListener("submit", displayWeather)
+                })
+
+        })
+
+    }   
+    // addEventListener on submit and create a dashboard function
+    cityFormEl.addEventListener("submit", displayWeather)
