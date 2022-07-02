@@ -1,6 +1,7 @@
 // define all html static selectors
 var cityEl = document.querySelector("#citySearchText")
 var cityFormEl = document.querySelector("#city-form")
+var saveSearchEl = document.querySelector("#recentSearch")
 
 // city big card info
 var cityHeaderEl = document.querySelector("#city-header")
@@ -11,6 +12,7 @@ var uvEl = document.querySelector("#uv")
 
 // city 5 day forecast cards
 var cityDay1 = document.querySelector("#city-header-card-1")
+var cityNameEl = document.querySelector("#card-title")
 var cardTemp = document.querySelector("#tempCard")
 var cardWind = document.querySelector("#windCard")
 var cardHumidity = document.querySelector("#humidityCard")
@@ -20,12 +22,13 @@ var cardUV = document.querySelector("#uvCard")
 var api = 'b9ed88a608928d0800d199dca396e9ad'
 
 
+
 // function to display weather to big card
 
 function displayWeather() {
     event.preventDefault()
     var cityName = cityEl.value
-    var urlCurrentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${api}`
+    var urlCurrentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${api}`
 
     fetch(urlCurrentWeather)
         .then(function (response) {
@@ -34,7 +37,7 @@ function displayWeather() {
 
         .then(function (currentData) {
             console.log(currentData)
-            var fiveDayWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&exclude={part}&appid=${api}`
+            var fiveDayWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&units=imperial&exclude={part}&appid=${api}`
 
             fetch(fiveDayWeather)
                 .then(function (response) {
@@ -65,8 +68,8 @@ function displayWeather() {
     
     function updateWeatherCard() {
         event.preventDefault()
-        var cityName = cityDay1.value
-        var urlFiveDayWeather = `https://api.openweathermap.org/data/2.5/forecast?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&appid=${api}`
+        var cityName = cityNameEl.value
+        var urlFiveDayWeather = `api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${api}`
 
 
         fetch(urlFiveDayWeather)
