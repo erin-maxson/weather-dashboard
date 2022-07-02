@@ -89,7 +89,5 @@ function displayWeather() {
         })
     }
 
-
-
     // addEventListener on submit and create a dashboard function
     cityFormEl.addEventListener("submit", displayWeather)
