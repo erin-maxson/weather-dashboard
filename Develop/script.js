@@ -1,5 +1,5 @@
 // define all html static selectors
-var cityEl = document.querySelector("#citySearchText")
+var cityEl = document.querySelector("#citySearchText2")
 var cityFormEl = document.querySelector("#city-form")
 var saveSearchEl = document.querySelector("#recentSearch")
 
@@ -22,10 +22,16 @@ var cardUV = document.querySelector("#uvCard")
 // API Key
 var api = 'b9ed88a608928d0800d199dca396e9ad'
 
+// search + save
+// when a user inputs a city name, it is stored in local storage
+// the city name is also added to the list of previous searches
+
+console.log(cityEl)
+localStorage.getItem("city", cityEl.textContent)
+localStorage.setItem("city", cityEl.textContent)
 
 
 // function to display weather to big card
-
 function displayWeather() {
     event.preventDefault()
     var cityName = cityEl.value
@@ -77,74 +83,30 @@ function displayWeather() {
         .then(function (response) {
             return response.json()
         })
-
-        .then(function (fiveDayData) {
-    
-            fiveDayEl.innerHTML = 
-            `<div class="col-sm-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title city-header city-header-card-1">Phoenix (06/15/2022)</h5>
-                        <p class="temp">Temp: <span id="tempCard">114</span>ºF</p>
-                        <p class="wind">Wind: <span id="windCard">114</span>MPH</p>
-                        <p class="humidity">Humidity: <span id="humidityCard">114 </span>%</p>
-                        <p class="uv">UV Index: <span id="uvCard">114</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title city-header">Phoenix (06/15/2022)</h5>
-                        <p class="temp">Temp: <span id="temp">114</span>ºF</p>
-                        <p class="wind">Wind: <span id="wind">114 </span> MPH</p>
-                        <p class="humidity">Humidity: <span id="humidity">114</span>%</p>
-                        <p class="uv">UV Index: <span id="uv">114</span></p>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-sm-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title city-header">Phoenix (06/15/2022)</h5>
-                        <p class="temp">Temp: <span id="temp">114</span>ºF</p>
-                        <p class="wind">Wind: <span id="wind">114</span> MPH</p>
-                        <p class="humidity">Humidity: <span id="humidity">114 </span>%</p>
-                        <p class="uv">UV Index: <span id="uv">114</span></p>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-sm-2">
-                <div class="card">
-                    <div class="card-body city-header">
-                        <h5 class="card-title">Phoenix (06/15/2022)</h5>
-                        <p class="temp">Temp: <span id="temp">114</span>ºF</p>
-                        <p class="wind">Wind: <span id="wind">114</span> MPH</p>
-                        <p class="humidity">Humidity: <span id="humidity">114</span>%</p>
-                        <p class="uv">UV Index: <span id="uv">114</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-2">
-                <div class="card">
-                    <div class="card-body city-header">
-                        <h5 class="card-title" id="card-title">Phoenix (06/15/2022)</h5>
-                        <p class="temp">Temp: <span id="temp">114</span>ºF</p>
-                        <p class="wind">Wind: <span id="wind">114</span> MPH</p>
-                        <p class="humidity">Humidity: <span id="humidity">114</span>%</p>
-                        <p class="uv">UV Index: <span id="uv">114 F</span></p>
-                    </div>
-                </div>
-            </div>
-        </div>`
-        })
     }
+
+    //     .then(function (fiveDayData) {
+    //         console.log(fiveDayData)
+
+    //         for ( i = 0; i < 5; i++) {
+    //             var forecastCard = document.createElement('div')
+    //             fiveDayEl.setAttribute('class', 'forecastCard'),
+    //         fiveDayEl.innerHTML = 
+    //         `<div class="col-sm-2">
+    //             <div class="card">
+    //                 <div class="card-body">
+    //                     <h5 class="card-title city-header city-header-card-1">Phoenix (06/15/2022)</h5>,
+    //                     <p class="temp">Temp: <span id="tempCard">`${fiveDayData.daily[i].temp.day}`</span>ºF</p>,
+    //                     <p class="wind">Wind: <span id="windCard">`${fiveDayData.daily[i].wind.speed}`</span>MPH</p>,
+    //                     <p class="humidity">Humidity: <span id="humidityCard">`${fiveDayData.daily[i].humidity}`</span>%</p>,
+    //                     <p class="uv">UV Index: <span id="uvCard">`${fiveDayData.daily[i].uvi}`</span></p>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //         }
+    //     })
+    // }`
+
 
     // addEventListener on submit and create a dashboard function
     cityFormEl.addEventListener("submit", displayWeather)
